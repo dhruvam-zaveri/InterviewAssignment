@@ -2,13 +2,14 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend of the interview assignment",
-  "main": "app.js",
+  "main": "app.py",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "python app.py",
     "serve": "node app.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
