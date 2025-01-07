@@ -24,7 +24,7 @@ function App() {
     setError("");
     try {
       const response = await axios.get(
-        `http://localhost:3001/financial-data/${ticker}`,
+        `https://dhruvamzaveri.pythonanywhere.com/financial-data/${ticker}`,
         {
           params: {
             start_date: startDate,
