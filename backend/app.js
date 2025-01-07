@@ -1,7 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const app = express();
-const port = 3000;
+const port = 3001;
 
 const API_KEY = "tERDfJv0mzZ9H4xZSvlGDg7yKMQXjXhb";
 const BASE_URL = "https://financialmodelingprep.com/api/v3/income-statement";
