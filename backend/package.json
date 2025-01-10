@@ -4,7 +4,7 @@
   "description": "backend of the interview assignment",
   "main": "app.py",
   "scripts": {
-    "start": "python financial-data.py",
+    "start": "python app.py",
     "serve": "node app.js"
   },
   "dependencies": {
