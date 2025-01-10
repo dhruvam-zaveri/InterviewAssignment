@@ -20,7 +20,7 @@ Follow these steps to get your development environment running:
 
 1. **Clone the repository**
    ```
-   git clone [https://github.com/your-username/project-title.git](https://github.com/dhruvam-zaveri/InterviewAssignment/)
+   git clone https://github.com/dhruvam-zaveri/InterviewAssignment/
    cd InterviewAssignment
    ```
 
