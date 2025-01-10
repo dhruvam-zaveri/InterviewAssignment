@@ -67,14 +67,14 @@ function App() {
         <h1 className="text-4xl font-bold text-left">Financial Data Viewer</h1>
       </header>
       <div className="flex justify-center items-center my-20">
-        <div className="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-xl">
+        <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-xl">
           <div className="space-y-2">
             <div className="flex items-center space-x-4">
-              <label className="w-3/12 font-bold">Search Ticker:</label>
+              <label className="w-1/5 font-bold">Search Ticker:</label>
               <input
                 type="text"
                 value={inputTicker}
-                className="border p-2 rounded-md flex-1 w-8/12"
+                className="border p-2 rounded-md flex-1 w-4/5"
                 onChange={(e) => setInputTicker(e.target.value)}
                 // onSubmit={(e) => setTicker(e.target.value)}
                 placeholder="Enter ticker symbol (e.g., AAPL)"
@@ -82,33 +82,28 @@ function App() {
               <button
                 onClick={(e) => setTicker(inputTicker)}
                 disabled={loading}
-                className="bg-black text-white p-2 rounded-md w-1/12"
+                className="bg-black text-white p-2 rounded-md w-1/4"
               >
-                {loading ? <CircularProgress size="1rem" /> : "Go!"}
+                {loading ? "Loading..." : "Search"}
               </button>
             </div>
-            <label className="font-bold">Date:</label>
             <div className="flex items-center space-x-4">
-              <div className="w-1/2">
-                <label className="w-2/5">Start: </label>
-                <input
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  className="border p-2 rounded-md flex-1 w-3/5"
-                />
-              </div>
+              <label className="w-1/2 font-bold">Start Date:</label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                className="border p-2 rounded-md flex-1"
+              />
               {/* </div>
             <div className="flex items-center space-x-4"> */}
-              <div className="w-1/2">
-                <label className="w-2/5">End: </label>
-                <input
-                  type="date"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                  className="border p-2 rounded-md flex-1 w-3/5"
-                />
-              </div>
+              <label className="w-1/2 font-bold">End Date:</label>
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                className="border p-2 rounded-md flex-1"
+              />
             </div>
             <label className="font-bold">Revenue:</label>
             <div className="flex items-center space-x-4">
@@ -160,35 +155,30 @@ function App() {
                 />
               </div>
             </div>
-            <label className="font-bold">Sort:</label>
             <div className="flex items-center space-x-4">
-              <div className="w-1/2">
-                <label className="w-1/5">By: </label>
-                <select
-                  value={sortField}
-                  onChange={(e) => setSortField(e.target.value)}
-                  className="border p-2 rounded-md flex-1 w-4/5"
-                >
-                  <option value="">Select Field</option>
-                  <option value="date">Date</option>
-                  <option value="revenue">Revenue</option>
-                  <option value="netIncome">Net Income</option>
-                </select>
-              </div>
-              {/* </div>
-            <div className="flex items-center space-x-4"> */}
-              <div className="w-1/2">
-                <label className="w-2/6">Order: </label>
-                <select
-                  value={sortOrder}
-                  onChange={(e) => setSortOrder(e.target.value)}
-                  className="border p-2 rounded-md flex-1 w-4/6"
-                >
-                  <option value="">Select Order</option>
-                  <option value="asc">Ascending</option>
-                  <option value="desc">Descending</option>
-                </select>
-              </div>
+              <label className="w-1/5 font-bold">Sort By:</label>
+              <select
+                value={sortField}
+                onChange={(e) => setSortField(e.target.value)}
+                className="border p-2 rounded-md flex-1 w-4/5"
+              >
+                <option value="">Select Field</option>
+                <option value="date">Date</option>
+                <option value="revenue">Revenue</option>
+                <option value="netIncome">Net Income</option>
+              </select>
+            </div>
+            <div className="flex items-center space-x-4">
+              <label className="w-1/5 font-bold">Sorting Order:</label>
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                className="border p-2 rounded-md flex-1 w-4/5"
+              >
+                <option value="">Select Order</option>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
             </div>
             <div className="flex justify-center">
               <button
