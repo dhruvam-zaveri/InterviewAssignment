@@ -10,7 +10,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Filtering states
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [minRevenue, setMinRevenue] = useState("");
@@ -49,12 +48,9 @@ function App() {
     }
   };
 
-  // useEffect to trigger fetchData on component mount
   useEffect(() => {
-    // setTicker(inputTicker);
-    console.log(ticker);
     fetchData();
-  }, [ticker]); // Empty dependency array means this effect will only run once, after initial render
+  }, [ticker]);
 
   return (
     <div className="bg-custom-bg bg-cover bg-center">
@@ -70,21 +66,28 @@ function App() {
         <div className="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-xl">
           <div className="space-y-2">
             <div className="flex items-center space-x-4">
-              <label className="w-1/5 font-bold">Search Ticker:</label>
+              <label className="w-2/12 font-bold"> Ticker: </label>
               <input
                 type="text"
                 value={inputTicker}
-                className="border p-2 rounded-md flex-1 w-4/5"
-                onChange={(e) => setInputTicker(e.target.value)}
-                // onSubmit={(e) => setTicker(e.target.value)}
+                className="border p-2 rounded-md flex-1 w-8/12"
+                onChange={(e) => setInputTicker(e.target.value.trim())}
                 placeholder="Enter ticker symbol (e.g., AAPL)"
               />
               <button
-                onClick={(e) => setTicker(inputTicker)}
+                onClick={(e) =>
+                  setTicker(
+                    inputTicker !== undefined &&
+                      inputTicker !== "" &&
+                      inputTicker !== " "
+                      ? inputTicker
+                      : ticker
+                  )
+                }
                 disabled={loading}
-                className="bg-black text-white p-2 rounded-md w-1/4"
+                className="bg-black text-white p-2 rounded-md w-2/12"
               >
-                {loading ? "Loading..." : "Search"}
+                {loading ? <CircularProgress size="1rem" /> : "Go!"}
               </button>
             </div>
             <label className="font-bold">Date:</label>
