@@ -32,7 +32,12 @@ function FinancialDataTable({ data, ticker }) {
         Showing data for {ticker}
       </p>
 
-      <TableContainer component={Paper} sx={{ width: "80vw", margin: "auto" }}>
+      <TableContainer
+        component={Paper}
+        sx={{ width: "80vw", margin: "auto" }}
+        // className="scrollbar-thin scrollbar-track-scrollbarTrack scrollbar-thumb-scrollbar"
+        className="always-visible-scrollbar"
+      >
         <Table stickyHeader>
           <TableHead
             sx={{ "& .MuiTableRow-root": { bgcolor: "primary.main" } }}
