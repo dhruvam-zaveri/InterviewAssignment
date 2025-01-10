@@ -67,7 +67,7 @@ function App() {
         <h1 className="text-4xl font-bold text-left">Financial Data Viewer</h1>
       </header>
       <div className="flex justify-center items-center my-20">
-        <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-xl">
+        <div className="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-xl">
           <div className="space-y-2">
             <div className="flex items-center space-x-4">
               <label className="w-1/5 font-bold">Search Ticker:</label>
@@ -87,23 +87,28 @@ function App() {
                 {loading ? "Loading..." : "Search"}
               </button>
             </div>
+            <label className="font-bold">Date:</label>
             <div className="flex items-center space-x-4">
-              <label className="w-1/2 font-bold">Start Date:</label>
-              <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                className="border p-2 rounded-md flex-1"
-              />
+              <div className="w-1/2">
+                <label className="w-1/3 font-bold">Start: </label>
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  className="border p-2 rounded-md flex-1 w-2/3"
+                />
+              </div>
               {/* </div>
             <div className="flex items-center space-x-4"> */}
-              <label className="w-1/2 font-bold">End Date:</label>
-              <input
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                className="border p-2 rounded-md flex-1"
-              />
+              <div className="w-1/2">
+                <label className="w-1/3 font-bold">End: </label>
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  className="border p-2 rounded-md flex-1 w-2/3 "
+                />
+              </div>
             </div>
             <label className="font-bold">Revenue:</label>
             <div className="flex items-center space-x-4">
