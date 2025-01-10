@@ -25,7 +25,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 function FinancialDataTable({ data, ticker }) {
   return (
     <>
-      <p style={{ fontSize: "1.5em", fontWeight: 600, textAlign: "center" }}>
+      <p
+        style={{ fontSize: "1.5em", fontWeight: 600, textAlign: "center" }}
+        className="text-3xl text-white"
+      >
         Showing data for {ticker}
       </p>
 

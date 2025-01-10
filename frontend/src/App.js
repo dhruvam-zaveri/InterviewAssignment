@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 import FinancialDataTable from "./FinancialDataTable";
-
+// import logo from "./logo.png";
 function App() {
   const [data, setData] = useState([]);
   const [ticker, setTicker] = useState("AAPL");
+  const [inputTicker, setInputTicker] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -49,104 +51,166 @@ function App() {
 
   // useEffect to trigger fetchData on component mount
   useEffect(() => {
+    // setTicker(inputTicker);
+    console.log(ticker);
     fetchData();
   }, [ticker]); // Empty dependency array means this effect will only run once, after initial render
 
   return (
-    <div>
-      <p style={{ fontSize: "2em", fontWeight: 600, textAlign: "center" }}>
+    <div className="bg-custom-bg bg-cover bg-center">
+      {/* <p style={{ fontSize: "2em", fontWeight: 600, textAlign: "center" }} class="text-3xl font-bold underline">
         Financial Data Viewer
-      </p>
-
-      {/* <input
-        type="text"
-        value={ticker}
-        onChange={(e) => setTicker(e.target.value)}
-        placeholder="Enter ticker symbol (e.g., AAPL)"
-      />
-      <button onClick={fetchData} disabled={loading}>
-        {loading ? "Loading..." : "Fetch Data"}
-      </button> */}
-      <div style={{ margin: "auto", width: "fit-content", padding: "10px" }}>
-        <div style={{ marginBottom: "10px", width: "fit-content" }}>
-          <label>Start Date: </label>
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
+      </p> */}
+      <header className="bg-[#13486f] text-white py-6 px-8 flex items-center space-x-4">
+        {/* Logo Image with larger size */}
+        {/* Heading */}
+        <h1 className="text-4xl font-bold text-left">Financial Data Viewer</h1>
+      </header>
+      <div className="flex justify-center items-center my-20">
+        <div className="bg-white rounded-lg shadow-lg p-6 w-4/5 max-w-xl">
+          <div className="space-y-2">
+            <div className="flex items-center space-x-4">
+              <label className="w-3/12 font-bold">Search Ticker:</label>
+              <input
+                type="text"
+                value={inputTicker}
+                className="border p-2 rounded-md flex-1 w-8/12"
+                onChange={(e) => setInputTicker(e.target.value)}
+                // onSubmit={(e) => setTicker(e.target.value)}
+                placeholder="Enter ticker symbol (e.g., AAPL)"
+              />
+              <button
+                onClick={(e) => setTicker(inputTicker)}
+                disabled={loading}
+                className="bg-black text-white p-2 rounded-md w-1/12"
+              >
+                {loading ? <CircularProgress size="1rem" /> : "Go!"}
+              </button>
+            </div>
+            <label className="font-bold">Date:</label>
+            <div className="flex items-center space-x-4">
+              <div className="w-1/2">
+                <label className="w-2/5">Start: </label>
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  className="border p-2 rounded-md flex-1 w-3/5"
+                />
+              </div>
+              {/* </div>
+            <div className="flex items-center space-x-4"> */}
+              <div className="w-1/2">
+                <label className="w-2/5">End: </label>
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  className="border p-2 rounded-md flex-1 w-3/5"
+                />
+              </div>
+            </div>
+            <label className="font-bold">Revenue:</label>
+            <div className="flex items-center space-x-4">
+              <div className="w-1/2">
+                <label className="w-1/5">Min: </label>
+                <input
+                  type="number"
+                  value={minRevenue}
+                  onChange={(e) => setMinRevenue(e.target.value)}
+                  placeholder="Min Revenue"
+                  className="border p-2 rounded-md flex-1 w-4/5"
+                />
+              </div>
+              {/* </div>
+            <div className="flex items-center space-x-4"> */}
+              <div className="w-1/2">
+                <label className="w-1/5">Max: </label>
+                <input
+                  type="number"
+                  value={maxRevenue}
+                  onChange={(e) => setMaxRevenue(e.target.value)}
+                  placeholder="Max Revenue"
+                  className="border p-2 rounded-md flex-1 w-4/5"
+                />
+              </div>
+            </div>
+            <label className="font-bold">Net Income:</label>
+            <div className="flex items-center space-x-4">
+              <div className="w-1/2">
+                <label className="w-1/5">Min: </label>
+                <input
+                  type="number"
+                  value={minNetIncome}
+                  onChange={(e) => setMinNetIncome(e.target.value)}
+                  placeholder="Min Net Income"
+                  className="border p-2 rounded-md flex-1 w-4/5"
+                />
+              </div>
+              {/* </div>
+            <div className="flex items-center space-x-4"> */}
+              <div className="w-1/2">
+                <label className="w-1/5">Max: </label>
+                <input
+                  type="number"
+                  value={maxNetIncome}
+                  onChange={(e) => setMaxNetIncome(e.target.value)}
+                  placeholder="Max Net Income"
+                  className="border p-2 rounded-md flex-1 w-4/5"
+                />
+              </div>
+            </div>
+            <label className="font-bold">Sort:</label>
+            <div className="flex items-center space-x-4">
+              <div className="w-1/2">
+                <label className="w-1/5">By: </label>
+                <select
+                  value={sortField}
+                  onChange={(e) => setSortField(e.target.value)}
+                  className="border p-2 rounded-md flex-1 w-4/5"
+                >
+                  <option value="">Select Field</option>
+                  <option value="date">Date</option>
+                  <option value="revenue">Revenue</option>
+                  <option value="netIncome">Net Income</option>
+                </select>
+              </div>
+              {/* </div>
+            <div className="flex items-center space-x-4"> */}
+              <div className="w-1/2">
+                <label className="w-2/6">Order: </label>
+                <select
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                  className="border p-2 rounded-md flex-1 w-4/6"
+                >
+                  <option value="">Select Order</option>
+                  <option value="asc">Ascending</option>
+                  <option value="desc">Descending</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <button
+                onClick={fetchData}
+                className="bg-black text-white p-2 rounded-md mt-4 w-1/2"
+              >
+                Apply Filters
+              </button>
+            </div>
+          </div>
         </div>
-        <div style={{ marginBottom: "10px", width: "fit-content" }}>
-          <label>End Date: </label>
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-        </div>
-        <div style={{ marginBottom: "10px", width: "fit-content" }}>
-          <label>Min Revenue: </label>
-          <input
-            type="number"
-            value={minRevenue}
-            onChange={(e) => setMinRevenue(e.target.value)}
-            placeholder="Min Revenue"
-          />
-        </div>
-        <div style={{ marginBottom: "10px", width: "fit-content" }}>
-          <label>Max Revenue: </label>
-          <input
-            type="number"
-            value={maxRevenue}
-            onChange={(e) => setMaxRevenue(e.target.value)}
-            placeholder="Max Revenue"
-          />
-        </div>
-        <div style={{ marginBottom: "10px", width: "fit-content" }}>
-          <label>Min Net Income: </label>
-          <input
-            type="number"
-            value={minNetIncome}
-            onChange={(e) => setMinNetIncome(e.target.value)}
-            placeholder="Min Net Income"
-          />
-        </div>
-        <div style={{ marginBottom: "10px", width: "fit-content" }}>
-          <label>Max Net Income: </label>
-          <input
-            type="number"
-            value={maxNetIncome}
-            onChange={(e) => setMaxNetIncome(e.target.value)}
-            placeholder="Max Net Income"
-          />
-        </div>
-        <div style={{ marginBottom: "10px", width: "fit-content" }}>
-          <label>Sort By: </label>
-          <select
-            value={sortField}
-            onChange={(e) => setSortField(e.target.value)}
-          >
-            <option value="">Select Field</option>
-            <option value="date">Date</option>
-            <option value="revenue">Revenue</option>
-            <option value="netIncome">Net Income</option>
-          </select>
-        </div>
-        <div style={{ marginBottom: "10px", width: "fit-content" }}>
-          <label>Sorting Order: </label>
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-          >
-            <option value="">Select Order</option>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-        </div>
-        <button onClick={fetchData}>Apply Filters</button>
       </div>
-      {error && <p>{error}</p>}
-      <FinancialDataTable data={data} ticker={ticker} />
+
+      <div className="justify-center items-center">
+        {error && <p>{error}</p>}
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <FinancialDataTable data={data} ticker={ticker} />
+        )}
+      </div>
+      <div className="h-16"></div>
     </div>
   );
 }
